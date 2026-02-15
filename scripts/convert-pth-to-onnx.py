@@ -1,5 +1,25 @@
 #!/usr/bin/env python
 
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "bin2c>=0.2.0",
+#     "cython>=3.2.4",
+#     "librosa>=0.11.0",
+#     "musdb>=0.4.3",
+#     "museval>=0.4.1",
+#     "numpy>=2.3.5",
+#     "onnx>=1.20.1",
+#     "onnxruntime>=1.24.1",
+#     "torch>=2.10.0",
+#     "demucs",
+#     "onnxscript>=0.6.2",
+# ]
+#
+# [tool.uv.sources]
+# demucs = { path = "../demucs-for-onnx", editable = true }
+# ///
+
 import sys
 import torch
 from torch.nn import functional as F

@@ -83,10 +83,11 @@ if __name__ == '__main__':
             dummy_input,
             onnx_file_path,
             export_params=True,
-            opset_version=17,
+            opset_version=25,
             do_constant_folding=True,
             input_names=['input'],
-            output_names=['output']
+            output_names=['output'],
+            external_data=False
         )
         print(f"Model successfully converted to ONNX format at {onnx_file_path}")
     except Exception as e:

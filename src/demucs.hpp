@@ -1,7 +1,7 @@
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
-#include <onnxruntime/core/session/onnxruntime_cxx_api.h>
+#include <onnxruntime_cxx_api.h>
 
 #include <Eigen/Dense>
 #include <array>
@@ -26,16 +26,15 @@ const int TIME_BRANCH_LEN_IN = 343980;
 struct demucs_model {
   std::unique_ptr<Ort::Session> sess;  // Smart pointer to allow "empty" state
   int nb_sources = 0;
-  Ort::Env env{ORT_LOGGING_LEVEL_ERROR,
-               "demucs_onnx"};            // Persistent environment
+  Ort::Env& env;                          // Reference to external environment
   std::vector<std::string> input_names;   // Persistent input names
   std::vector<std::string> output_names;  // Persistent output names
 
   std::vector<const char*> input_names_ptrs;
   std::vector<const char*> output_names_ptrs;
 
-  // Constructor (optionally initialize here if needed)
-  demucs_model() = default;
+  // Constructor requiring external environment
+  explicit demucs_model(Ort::Env& ext_env) : env(ext_env) {}
 };
 
 bool load_model(const char* model_data, int n_bytes, struct demucs_model& model,
